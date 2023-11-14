@@ -1,0 +1,236 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  width: 75vw;
+}
+
+.logo {
+  width: 430px;
+  /* Relative to the parent's width */
+  margin-bottom: 80px;
+  /* Relative to the font size of the element */
+  margin-top: 50px;
+  /* Relative to the font size of the element */
+  transition: all 0.4s ease-in-out;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 0.4rem #f77f00);
+}
+
+.tr th {
+  padding: 1em 1.5em;
+  /* Relative to the font size of the element */
+  background-color: #1b1d20;
+  border-radius: 10px;
+  text-transform: capitalize;
+}
+
+.tr th:nth-child(5) {
+  font-size: 0;
+  width: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.tr th:nth-child(4) {
+  width: 80px;
+}
+
+.tr th:nth-child(6) {
+  width: 60px;
+}
+
+.tr th:first-child {
+  font-size: 0px;
+  width: 20px;
+  background-color: transparent;
+  color: transparent;
+}
+
+.problem-name {
+  width: 40vw;
+  /* Relative to the viewport's width */
+}
+
+.problem-name a {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 1.25em;
+  /* Relative to the font size of the element */
+  padding: 0.5em 1.5em;
+  /* Relative to the font size of the element */
+  transition: all 0.3s ease-in-out;
+}
+
+
+.problem-name a:hover {
+  color: #669bbc;
+}
+
+select {
+  font-size: 1em;
+  /* Relative to the font size of the element */
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.star {
+  background-color: #1b1d20;
+  padding: 0.6em 0.8em;
+  /* Relative to the font size of the element */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6em;
+  /* Relative to the font size of the element */
+}
+
+.star.golden {
+  color: #edc531;
+}
+
+.solution-link {
+  display: flex;
+  justify-content: center;
+}
+
+.solution-link a {
+  text-decoration: none;
+  padding-top: 1.1em;
+  /* Relative to the font size of the element */
+  font-size: 1.25em;
+  /* Relative to the font size of the element */
+  transition: all 0.25s ease-in-out;
+}
+
+.solution-link a:hover {
+  font-size: 1.5em;
+  margin-top: -0.25em;
+  /* Relative to the font size of the element */
+}
+
+.difficulty {
+  width: 140px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.difficulty.Easy {
+  color: #2a9d8f;
+}
+
+.difficulty.Medium {
+  color: #e9c46a;
+}
+
+.difficulty.Hard {
+  color: #e76f51;
+}
+
+.checkbox-col {
+  text-align: center;
+  transform: scale(1.5);
+}
+
+.problem-name a.completed {
+  text-decoration: line-through;
+}
+
+tr.completed {
+  background-color: #1b1d20;
+}
+
+tr td {
+  border-radius: 10px;
+}
+
+/* CSS for devices with a width of 600px or less */
+@media (max-width: 1200px) {
+
+  .table {
+    width: 95vw;
+  }
+
+  .logo {
+    width: 350px;
+  }
+}
+
+@media (max-width: 600px) {
+  .tr th:nth-child(2) {
+    font-size: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  .tr th:nth-child(4) {
+    font-size: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  .tr th:nth-child(6) {
+    font-size: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  .table {
+    width: 95vw;
+  }
+
+  .logo {
+    width: 300px;
+  }
+
+  tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .solution-link {
+    padding-left: 40px;
+    justify-content: left;
+  }
+
+  .difficulty {
+    font-size: 18px;
+    text-align: left;
+    padding-left: 30px;
+  }
+
+  .problem-name a {
+    font-size: 20px;
+    width: 200%;
+  }
+
+  .checkbox-col {
+    padding: 2em;
+    margin-left: -23em;
+    padding-bottom: 3em;
+    text-align: center;
+    transform: scale(2.5);
+  }
+
+  tbody tr {
+    border: #1b1d20;
+  }
+}
