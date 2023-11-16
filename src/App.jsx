@@ -43,7 +43,7 @@ function ProblemRow({ problem, onStarClick, onCheckClick }) {
           );
         } else if (key === 'difficulty') {
           return <td key={key} className={`difficulty ${value}`}>{value}</td>;
-        } else if (key !== 'link' && key !== 'isStarred') { // Exclude 'isStarred'
+        } else if (key !== 'link' && key !== 'isStarred' && key !== 'isCompleted') { // Exclude 'isStarred' and 'isCompleted'
           return <td key={key}>{value}</td>;
         }
       })}
@@ -59,14 +59,12 @@ function ProblemRow({ problem, onStarClick, onCheckClick }) {
   );
 }
 
-
-
-
-
 function App() {
   const [originalProblems, setOriginalProblems] = useState([]);
   const [problems, setProblems] = useState([]);
   const [filter, setFilter] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const problemsPerPage = 10;
 
   useEffect(() => {
     const problemsWithStars = problemsData.map(problem => {
@@ -115,7 +113,6 @@ function App() {
   };
 
   const handleCheckClick = (clickedProblem) => {
-    // Update problems state
     const updatedProblems = problems.map(problem => {
       if (problem === clickedProblem) {
         return { ...problem, isCompleted: !problem.isCompleted };
@@ -125,7 +122,6 @@ function App() {
 
     setProblems(updatedProblems);
 
-    // Update original problems state
     const updatedOriginalProblems = originalProblems.map(problem => {
       if (problem.name === clickedProblem.name) {
         return { ...problem, isCompleted: !problem.isCompleted };
@@ -135,23 +131,37 @@ function App() {
 
     setOriginalProblems(updatedOriginalProblems);
 
-    // Save to localStorage
     localStorage.setItem(
       `completed_${clickedProblem.name}`,
       JSON.stringify({ isCompleted: !clickedProblem.isCompleted })
     );
+  };
+
+  const indexOfLastProblem = currentPage * problemsPerPage;
+  const indexOfFirstProblem = indexOfLastProblem - problemsPerPage;
+  const currentProblems = problems.slice(indexOfFirstProblem, indexOfLastProblem);
+
+  const handlePageChange = (event) => {
+    const newPageNumber = Number(event.target.id);
+    if (newPageNumber >= 1 && newPageNumber <= pageNumbers.length) {
+      setCurrentPage(newPageNumber);
+    }
+  };
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(problems.length / problemsPerPage); i++) {
+    pageNumbers.push(i);
   }
 
   return (
     <>
-      <title>LeetCode Problems</title>
       <div className="container">
         <img className='logo' src={logo} />
         <table id="problemsTable" className='table'>
           <thead>
             <tr className='tr'>
               <th>Star</th>
-              {Object.keys(problems[0] || {}).filter((header) => header !== 'link' && header !== 'isStarred').map((header) => (
+              {Object.keys(problems[0] || {}).filter((header) => header !== 'link' && header !== 'isStarred' && header !== 'isCompleted').map((header) => ( // Exclude 'isCompleted'
                 <th key={header}>
                   {header !== 'difficulty' ? (
                     header === 'name' ? 'Problem' : header
@@ -168,9 +178,8 @@ function App() {
               <th>Status</th>
             </tr>
           </thead>
-
           <tbody>
-            {problems.map((problem, index) => (
+            {currentProblems.map((problem, index) => (
               <ProblemRow
                 key={index}
                 problem={problem}
@@ -180,11 +189,24 @@ function App() {
             ))}
           </tbody>
         </table>
+        <div id="page-numbers">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange({ target: { id: currentPage - 1 } })}
+          >
+            ⏪
+          </button>
+          <span>{currentPage}</span>
+          <button
+            disabled={currentPage === pageNumbers.length}
+            onClick={() => handlePageChange({ target: { id: currentPage + 1 } })}
+          >
+            ⏩
+          </button>
+        </div>
       </div>
-
     </>
   );
-
 }
 
 export default App;
