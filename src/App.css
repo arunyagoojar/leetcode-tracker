@@ -77,12 +77,15 @@
 
 select {
   font-size: 1em;
-  /* Relative to the font size of the element */
-  border: none;
-  background: transparent;
-  color: #fff;
   font-weight: bold;
   text-transform: capitalize;
+  background: #1b1d20;
+  color: rgba(255, 255, 255, 0.7);
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .star {
